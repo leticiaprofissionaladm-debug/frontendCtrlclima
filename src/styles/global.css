@@ -1,0 +1,569 @@
+
+/* ==========================================
+   EARTHSCOPE — GLOBAL STYLES
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+
+:root {
+  font-family: 'DM Sans', sans-serif;
+  color: #F3F6F8;
+  background: #0B1724;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --bg: #0B1724;
+  --surface: #102536;
+  --surface-light: #18364A;
+  --surface-hover: #1B4053;
+  --border: rgba(143, 167, 183, 0.17);
+  --border-strong: rgba(143, 167, 183, 0.28);
+  --muted: #91A6B5;
+  --teal: #35C6B0;
+  --teal-dark: #087F8C;
+  --sand: #E4D49A;
+  --white: #F3F6F8;
+  --danger: #FF8585;
+
+  --content-width: 1600px;
+  --page-padding: clamp(22px, 8vw, 125px);
+  --radius: 12px;
+  --transition: 0.22s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+:focus-visible {
+  outline: 2px solid var(--sand);
+  outline-offset: 4px;
+}
+
+/* ==========================================
+   ACESSIBILIDADE — PAINEL
+========================================== */
+
+.accessibility-tools {
+  position: fixed !important;
+  right: 20px !important;
+  bottom: 88px !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 9998 !important;
+
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.accessibility-launcher {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(53, 198, 176, 0.45);
+  border-radius: 16px;
+
+  background: #087F8C;
+  color: #F3F6F8;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.accessibility-launcher:hover {
+  background: #35C6B0;
+  color: #0B1724;
+  border-color: #35C6B0;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(53, 198, 176, 0.25);
+}
+
+.accessibility-launcher span {
+  display: none;
+}
+
+.accessibility-launcher:focus-visible,
+.accessibility-panel button:focus-visible {
+  outline: 3px solid #E4D49A !important;
+  outline-offset: 4px;
+}
+
+.accessibility-panel {
+  width: min(360px, calc(100vw - 30px));
+  max-height: min(72vh, 650px);
+  overflow-y: auto;
+  padding: 18px;
+
+  background: #102536;
+  color: #F3F6F8;
+
+  border: 1px solid #285064;
+  border-radius: 16px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.accessibility-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #29485A;
+}
+
+.accessibility-panel-heading strong {
+  color: #F3F6F8;
+  font-size: 15px;
+}
+
+.accessibility-panel-heading p {
+  color: #AFC5D5;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 5px;
+}
+
+.accessibility-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid #29485A;
+  color: #E2ECF2;
+}
+
+.accessibility-inline {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.accessibility-inline .secondary-button {
+  min-width: 36px;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #35586B;
+  border-radius: 9px;
+  background: #18364A;
+  color: #F3F6F8;
+  cursor: pointer;
+}
+
+.accessibility-inline .secondary-button:hover {
+  background: #087F8C;
+  border-color: #35C6B0;
+}
+
+.accessibility-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 4px;
+  border: none;
+  border-bottom: 1px solid #29485A;
+  background: transparent;
+  color: #E2ECF2;
+  text-align: left;
+  cursor: pointer;
+}
+
+.accessibility-option span {
+  flex: 1;
+}
+
+.accessibility-option strong {
+  color: #AFC5D5;
+  font-size: 10px;
+}
+
+.accessibility-option:hover {
+  background: rgba(53, 198, 176, 0.08);
+}
+
+.accessibility-option.selected {
+  color: #35C6B0;
+}
+
+.accessibility-section-label {
+  margin: 18px 0 10px;
+  color: #35C6B0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.accessibility-speech {
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.accessibility-panel .primary-button,
+.accessibility-panel .secondary-button {
+  background: #18364A;
+  color: #F3F6F8;
+  border: 1px solid #35586B;
+  border-radius: 9px;
+}
+
+.accessibility-panel .primary-button:hover,
+.accessibility-panel .secondary-button:hover {
+  background: #087F8C;
+  border-color: #35C6B0;
+}
+
+.accessibility-panel .full {
+  width: 100%;
+  justify-content: center;
+  padding: 11px;
+}
+
+.accessibility-note {
+  color: #AFC5D5;
+  font-size: 11px;
+  line-height: 1.6;
+  margin-top: 14px;
+}
+
+/* ==========================================
+   RECURSOS DE ACESSIBILIDADE
+========================================== */
+
+html[data-dyslexia="on"] body,
+html[data-dyslexia="on"] button,
+html[data-dyslexia="on"] input,
+html[data-dyslexia="on"] textarea,
+html[data-dyslexia="on"] select {
+  font-family: "Atkinson Hyperlegible", Arial, sans-serif !important;
+}
+
+html[data-links="underlined"] a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+html[data-spacing="wide"] body {
+  line-height: 1.8 !important;
+  letter-spacing: 0.025em;
+  word-spacing: 0.08em;
+}
+
+.reading-focus-highlight {
+  outline: 2px solid #E4D49A !important;
+  outline-offset: 4px;
+  background: rgba(228, 212, 154, 0.12) !important;
+}
+
+html[data-reduce-motion="on"] *,
+html[data-reduce-motion="on"] *::before,
+html[data-reduce-motion="on"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ==========================================
+   ALTO CONTRASTE
+========================================== */
+
+html[data-contrast="high"] body,
+html[data-contrast="high"] .app,
+html[data-contrast="high"] .main {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+html[data-contrast="high"] .panel,
+html[data-contrast="high"] .stat-card,
+html[data-contrast="high"] .site-header,
+html[data-contrast="high"] .accessibility-panel {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+}
+
+html[data-contrast="high"] * {
+  border-color: #fff !important;
+}
+
+html[data-contrast="high"] button:focus-visible,
+html[data-contrast="high"] a:focus-visible {
+  outline: 3px solid #FFFF00 !important;
+  outline-offset: 4px !important;
+}
+
+/* ==========================================
+   SELETOR DE IDIOMA
+========================================== */
+
+.language-selector {
+  position: relative;
+  display: inline-flex;
+  z-index: 100;
+}
+
+.language-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 10px 13px;
+  border: 1px solid #35586B;
+  border-radius: 10px;
+  background: #18364A;
+  color: #F3F6F8;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.language-trigger:hover {
+  background: #087F8C;
+  border-color: #35C6B0;
+}
+
+.language-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 190px;
+  padding: 8px;
+  border: 1px solid #35586B;
+  border-radius: 12px;
+  background: #18364A;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+.language-heading {
+  display: block;
+  padding: 9px 10px;
+  color: #A9C0CC;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 10px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #F3F6F8;
+  font-family: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.language-option:hover {
+  background: #087F8C;
+}
+
+.language-option svg {
+  margin-left: auto;
+  color: #35C6B0;
+}
+
+/* ==========================================
+   EARTH EXPLORER
+========================================== */
+
+.earth-explorer-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 310px) minmax(0, 1fr);
+  gap: 22px;
+  margin-top: 25px;
+}
+
+.earth-explorer-sidebar,
+.earth-map-container {
+  background: #122535;
+  border: 1px solid #294252;
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.earth-explorer-sidebar h3 {
+  margin: 12px 0;
+}
+
+.earth-explorer-sidebar > p {
+  color: #AAB9C4;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.earth-coordinates {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #294252;
+}
+
+.earth-coordinates > span {
+  color: #35C6B0;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  font-weight: 700;
+}
+
+.earth-coordinates p {
+  color: #F3F6F8;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.earth-location-name {
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #18364A;
+  color: #35C6B0;
+  font-size: 13px;
+}
+
+.earth-map-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.earth-map-heading span {
+  color: #35C6B0;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.earth-map {
+  height: 520px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.earth-leaflet-map {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.earth-map-caption {
+  color: #AAB9C4;
+  font-size: 11px;
+  margin-top: 14px;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 850px) {
+  .earth-explorer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .earth-map {
+    height: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .accessibility-tools {
+    right: 14px !important;
+    bottom: 82px !important;
+  }
+
+  .accessibility-launcher {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 14px;
+  }
+
+  .accessibility-panel {
+    width: min(340px, calc(100vw - 28px));
+    max-height: 68vh;
+  }
+}
+
+@media (max-width: 700px) {
+  .language-dropdown {
+    right: 0;
+  }
+}
+
+@media print {
+  .accessibility-tools {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,598 @@
+
+/* ========================================
+   EARTHSCOPE - LOCATION FILTER
+======================================== */
+
+.earthscope-location-filter {
+    position: relative;
+    width: 100%;
+    padding: 22px;
+    border: 1px solid rgba(53, 198, 176, 0.18);
+    border-radius: 16px;
+    background: #102536;
+    color: #F3F6F8;
+    font-family: inherit;
+    box-sizing: border-box;
+  }
+  
+  .location-filter-heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 22px;
+  }
+  
+  .location-filter-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: 1px solid rgba(53, 198, 176, 0.3);
+    border-radius: 12px;
+    background: rgba(8, 127, 140, 0.2);
+    color: #35C6B0;
+  }
+  
+  .location-filter-eyebrow {
+    display: block;
+    margin-bottom: 4px;
+    color: #35C6B0;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+  
+  .location-filter-heading h3 {
+    margin: 0;
+    color: #F3F6F8;
+    font-size: 19px;
+    font-weight: 600;
+  }
+  
+  .location-filter-fields {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  
+  .location-field {
+    position: relative;
+    min-width: 0;
+  }
+  
+  .location-field > label {
+    display: block;
+    margin-bottom: 9px;
+    color: #A9C0CC;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  .location-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    min-height: 49px;
+    padding: 0 14px;
+    border: 1px solid #35586B;
+    border-radius: 10px;
+    background: #18364A;
+    color: #F3F6F8;
+    font-family: inherit;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  
+  .location-select-trigger:hover:not(:disabled),
+  .location-select-trigger.is-open {
+    border-color: #35C6B0;
+    background: #1B4052;
+  }
+  
+  .location-select-trigger:focus-visible {
+    outline: 2px solid #35C6B0;
+    outline-offset: 3px;
+  }
+  
+  .location-select-trigger.is-disabled,
+  .location-select-trigger:disabled {
+    opacity: 0.48;
+    cursor: not-allowed;
+  }
+  
+  .location-select-value {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .location-select-value svg {
+    flex-shrink: 0;
+    color: #35C6B0;
+  }
+  
+  .location-dropdown {
+    position: absolute;
+    z-index: 1000;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    min-width: 220px;
+    padding: 9px;
+    border: 1px solid #35586B;
+    border-radius: 12px;
+    background: #18364A;
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.35);
+  }
+  
+  .location-search {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 11px;
+    border: 1px solid #35586B;
+    border-radius: 8px;
+    background: #0B1724;
+  }
+  
+  .location-search svg {
+    flex-shrink: 0;
+    color: #35C6B0;
+  }
+  
+  .location-search input {
+    width: 100%;
+    height: 40px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #F3F6F8;
+    font-family: inherit;
+    font-size: 12px;
+  }
+  
+  .location-search input::placeholder {
+    color: #91A6B5;
+  }
+  
+  .location-options {
+    max-height: 220px;
+    margin: 8px 0 0;
+    padding: 0;
+    overflow-y: auto;
+    list-style: none;
+  }
+  
+  .location-options li {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .location-options li button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 11px 10px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #F3F6F8;
+    font-family: inherit;
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .location-options li button:hover,
+  .location-options li button.selected {
+    background: rgba(8, 127, 140, 0.28);
+  }
+  
+  .location-options li button.selected {
+    color: #35C6B0;
+  }
+  
+  .location-options li button small {
+    color: #91A6B5;
+    font-size: 10px;
+  }
+  
+  .location-empty {
+    padding: 18px 10px !important;
+    color: #91A6B5;
+    font-size: 12px;
+    text-align: center;
+  }
+  
+  .location-spinner {
+    flex-shrink: 0;
+    animation: location-spin 1s linear infinite;
+  }
+  
+  @keyframes location-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .location-filter-error {
+    margin: 14px 0 0;
+    color: #FF9B91;
+    font-size: 12px;
+  }
+  
+  .location-filter-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(145, 166, 181, 0.16);
+    color: #A9C0CC;
+    font-size: 12px;
+  }
+  
+  .location-status-dot {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #35C6B0;
+    box-shadow: 0 0 10px rgba(53, 198, 176, 0.55);
+  }
+  
+  @media (max-width: 640px) {
+    .earthscope-location-filter {
+      padding: 17px;
+    }
+  
+    .location-filter-fields {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+  
+    .location-dropdown {
+      min-width: 0;
+    }
+  }
+  
+.earth-explorer-page {
+    min-height: 100vh;
+    padding: 48px 5%;
+    background: #0B1724;
+    color: #F3F6F8;
+  }
+  
+  .explorer-heading {
+    margin-bottom: 36px;
+  }
+  
+  .explorer-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #35C6B0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  
+  .explorer-heading h1 {
+    margin: 15px 0 10px;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+  }
+  
+  .explorer-heading h1 span {
+    color: #35C6B0;
+  }
+  
+  .explorer-heading p,
+  .explorer-description {
+    color: #AAB9C4;
+    line-height: 1.7;
+  }
+  
+  .explorer-workspace {
+    display: grid;
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+    gap: 22px;
+  }
+  
+  .explorer-sidebar,
+  .explorer-map-section {
+    background: #122535;
+    border: 1px solid #284253;
+    border-radius: 16px;
+    padding: 22px;
+  }
+  
+  .explorer-panel-heading,
+  .explorer-map-header,
+  .explorer-map-header > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .explorer-panel-heading svg,
+  .explorer-map-header svg {
+    color: #35C6B0;
+  }
+  
+  .explorer-panel-heading h2 {
+    font-size: 18px;
+  }
+  
+  .explorer-description {
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  
+  .explorer-coordinates {
+    display: grid;
+    gap: 15px;
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid #284253;
+  }
+  
+  .explorer-coordinates > span {
+    color: #35C6B0;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+  }
+  
+  .explorer-coordinates > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  
+  .explorer-coordinates small {
+    color: #AAB9C4;
+    font-size: 11px;
+  }
+  
+  .explorer-coordinates strong {
+    font-variant-numeric: tabular-nums;
+  }
+  
+  .explorer-selected-location {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+    padding: 13px;
+    border-radius: 9px;
+    background: #18364A;
+    color: #35C6B0;
+    font-size: 12px;
+  }
+  
+  .explorer-map-header {
+    justify-content: space-between;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  
+  .map-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #AAB9C4;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+  
+  .map-status > span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #35C6B0;
+  }
+  
+  .explorer-map {
+    height: 550px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #18364A;
+  }
+  
+  .earth-leaflet-map {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .explorer-map-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    color: #AAB9C4;
+    font-size: 11px;
+  }
+  
+  .explorer-map-footer span:last-child {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #35C6B0;
+  }
+  
+  @media (max-width: 850px) {
+    .explorer-workspace {
+      grid-template-columns: 1fr;
+    }
+  
+    .explorer-map {
+      height: 420px;
+    }
+  }
+  
+  @media (max-width: 520px) {
+    .earth-explorer-page {
+      padding: 30px 16px;
+    }
+  
+    .explorer-sidebar,
+    .explorer-map-section {
+      padding: 16px;
+    }
+  
+    .explorer-map {
+      height: 350px;
+    }
+  }
+  
+  
+.nasa-data-section {
+    margin-top: 32px;
+    padding: 24px;
+    border: 1px solid var(--border-color, #dce3e8);
+    border-radius: 16px;
+    background: var(--card-background, #fff);
+  }
+  
+  .nasa-data-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  
+  .nasa-data-heading h2 {
+    margin: 10px 0 6px;
+    font-size: 24px;
+  }
+  
+  .nasa-data-heading p {
+    margin: 0;
+    color: #718096;
+  }
+  
+  .nasa-period {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #718096;
+  }
+  
+  .nasa-indicators {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  
+  .nasa-indicator-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 12px;
+  }
+  
+  .nasa-indicator-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #edf3f2;
+    color: #47766e;
+  }
+  
+  .nasa-indicator-label {
+    color: #718096;
+    font-size: 13px;
+  }
+  
+  .nasa-indicator-value {
+    font-size: 27px;
+    font-weight: 700;
+    color: var(--text-color, #24313b);
+  }
+  
+  .nasa-indicator-value small {
+    margin-left: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #718096;
+  }
+  
+  .nasa-indicator-source {
+    font-size: 11px;
+    color: #87939e;
+  }
+  
+  .nasa-feedback {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    color: #718096;
+  }
+  
+  .nasa-error {
+    color: #b54747;
+  }
+  
+  .nasa-loading-icon {
+    animation: nasa-spin 1.2s linear infinite;
+  }
+  
+  .nasa-source-note {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color, #e2e8f0);
+    color: #718096;
+    font-size: 12px;
+  }
+  
+  @keyframes nasa-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .nasa-indicators {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  
+  @media (max-width: 560px) {
+    .nasa-indicators {
+      grid-template-columns: 1fr;
+    }
+  
+    .nasa-data-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+  
